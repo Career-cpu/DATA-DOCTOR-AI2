@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and role information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role", "createdAt"]
+    },
+    "Dashboard": {
+      "title": "Dashboard",
+      "description": "A PowerBI dashboard entry for the showcase",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "desc": { "type": "string" },
+        "url": { "type": "string" },
+        "image": { "type": "string" },
+        "thumb": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "authorUid": { "type": "string" }
+      },
+      "required": ["title", "subtitle", "desc", "url", "image", "thumb", "order", "createdAt", "authorUid"]
+    },
+    "StoreDashboard": {
+      "title": "StoreDashboard",
+      "description": "A dashboard entry for the store gallery",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "desc": { "type": "string" },
+        "url": { "type": "string" },
+        "image": { "type": "string" },
+        "price": { "type": "string" },
+        "paymentLink": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "authorUid": { "type": "string" }
+      },
+      "required": ["title", "category", "desc", "image", "price", "paymentLink", "order", "createdAt", "authorUid"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Stores user profiles and roles"
+    },
+    "dashboards/{dashboardId}": {
+      "schema": { "$ref": "#/entities/Dashboard" },
+      "description": "Stores dashboard entries shown on the public site"
+    },
+    "store_dashboards/{dashboardId}": {
+      "schema": { "$ref": "#/entities/StoreDashboard" },
+      "description": "Stores dashboard entries shown on the store gallery"
+    }
+  }
+}
